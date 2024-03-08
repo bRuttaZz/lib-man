@@ -4,3 +4,6 @@ __pycache__
 
 var/*
 !var/.gitkeep
+
+## If you really want to keep migration files then uncomment the following
+# !var/migrations

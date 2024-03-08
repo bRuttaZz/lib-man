@@ -24,7 +24,7 @@ export function bindThemeSwitch() {
     systemMode.addEventListener("change", setSysTheme)
 
     // add custom button functionality
-    document.querySelector(".theme-swticher")?.addEventListener("click", (e) => {
+    document.querySelector(".theme-switcher-btn")?.addEventListener("click", (e) => {
         if (document.documentElement.classList.contains("dark")) {
             document.documentElement.classList.remove("dark");
             sessionStorage.setItem("theme-selection", "light");

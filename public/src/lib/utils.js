@@ -23,8 +23,10 @@ export function ajax(url, method = "GET", data = null, headers = {}) {
             catch {
                 json = undefined
             }
-            return reject({ status: request.status, 
-                response: request.response, json: json })
+            return reject({
+                status: request.status,
+                response: request.response, json: json
+            })
         }
         request.onload = () => {
             let json = {}
@@ -38,4 +40,15 @@ export function ajax(url, method = "GET", data = null, headers = {}) {
         }
         request.send(JSON.stringify(data))
     })
+}
+
+export function deleteAllCookies() {
+    const cookies = document.cookie.split(';');
+
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        const eqPos = cookie.indexOf('=');
+        const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+    }
 }

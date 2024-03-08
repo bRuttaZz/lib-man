@@ -2,13 +2,13 @@ import os
 from datetime import datetime
 from alembic import command
 from alembic.config import Config
+from ... import settings
 
 
 def get_alembic_conf():
     return Config(os.path.join(os.path.dirname(__file__), "alembic.ini"))
 
 def make_migrations():
-
     conf = get_alembic_conf()
     # conf.set_section_option('alembic', 'version_locations', "migrations")
     command.revision(

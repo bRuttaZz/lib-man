@@ -1,11 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
+
 :root {
+    /* default color */
     --main-bg: #fafafa;
+    --secondary-bg: #e8e8e8;
+    --text-box-bg: #ffffff;
+
+    --main-text-color: #666;
+    --sec-text-color: #646464;
+    --ter-text-color: #949494;
 }
 
 .dark {
+    /* dark color  */
     --main-bg: #2b2b2b;
+    --secondary-bg: #3b3b3b;
+    --text-box-bg: #c7c7c7;
+
+    --main-text-color: #e6e6e6;
+    --sec-text-color: #b9b9b9;
+    --ter-text-color: #999999;
 }
-/* 
-@media (prefers-color-scheme: dark) {
-    
-} */
+
+body {
+    font-family: 'Roboto', sans-serif;   
+    background-color: var(--main-bg);
+    color: var(--main-text-color);
+}
+
+.theme-swticher {
+    border-radius: 5px;
+    background-color: var(--secondary-bg);
+    width: 35px;
+}
+
+.main-color {
+    color: var(--main-text-color);
+}
+
+.seconday-color {
+    color: var(--sec-text-color);
+}
+
+.tertiary-color {
+    color: var(--ter-text-color);
+}
+
+.text-box-bg {
+    background-color: var(--text-box-bg);
+}

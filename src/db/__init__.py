@@ -1,9 +1,10 @@
-from .models import Base
-
+import os
 from sqlalchemy import create_engine, null
 from sqlalchemy.pool import NullPool
 from sqlalchemy.orm import sessionmaker, scoped_session
-from ..settings import DB_CONFIG, VAR_DIR, CREATE_ALL_DB_BINDS
+from .models import Base
+from ..settings import DB_CONFIG, VAR_DIR
+
 
 engine = null
 db_connection_string = ""
@@ -32,6 +33,3 @@ else:
 
 Session = scoped_session(sessionmaker(bind=engine))
 
-if CREATE_ALL_DB_BINDS:
-    print("creating everything")
-    Base.metadata.create_all(bind=engine, checkfirst=True)

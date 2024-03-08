@@ -1,0 +1,41 @@
+/**
+ * Yet an another implementation of ajax call :) 
+ * Noo! Actually I dont hate jquery
+ * @param {String} url - url to be called
+ * @param {String} method - method
+ * @param {Object} data - data to be passed along side (will be jsonified) 
+ * @param {Object} headers - additional headers 
+ * @returns 
+ */
+export function ajax(url, method = "GET", data = null, headers = {}) {
+    return new Promise((resolve, reject) => {
+        const request = new XMLHttpRequest()
+        request.open(method, url)
+        for (let key in headers)
+            request.setRequestHeader(key, headers[key])
+        if (data && Object.keys(data).length > 0)
+            request.setRequestHeader("Content-Type", "application/json")
+        request.onerror = () => {
+            let json = {}
+            try {
+                json = JSON.parse(request.response)
+            }
+            catch {
+                json = undefined
+            }
+            return reject({ status: request.status, 
+                response: request.response, json: json })
+        }
+        request.onload = () => {
+            let json = {}
+            try {
+                json = JSON.parse(request.response)
+            }
+            catch {
+                json = undefined
+            }
+            return resolve({ status: request.status, response: request.response, json: json })
+        }
+        request.send(JSON.stringify(data))
+    })
+}

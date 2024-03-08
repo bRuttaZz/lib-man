@@ -23,3 +23,18 @@ and then start running the system, it will take `example.env` as the config file
 
 ## Features
 1. There is a migration script
+
+## About the admin user 
+1. there is only one admin user
+2. default username and password : `admin` and `passowrd` respectively can be change latter on using the env variable. 
+
+
+## Tools and Libs
+1. Flask 
+2. Alembic
+3. Gunicorn
+4. bootstrap v5
+5. [material design icons](https://pictogrammers.com)
+6. pydantic
+
+

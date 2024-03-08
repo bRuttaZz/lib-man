@@ -1,0 +1,19 @@
+
+.login-box {
+    background-color: var(--secondary-bg);
+    color: var(--main-text-color);
+    border-radius: 8px;
+    width: 100%;
+
+    @media screen and (orientation: landscape) {
+        width: 50%;
+    }
+}
+
+.login-btn:disabled {
+    opacity: 0.7;
+}
+
+.error-region {
+    height: 2.5rem;
+}

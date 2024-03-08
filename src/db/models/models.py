@@ -17,6 +17,8 @@ class Admin(Base):
     """Admin account"""
     __tablename__ = "admin_account"
     id = Column(sa.Integer(), primary_key=True, autoincrement=True)
+    username = Column(sa.String(15), unique=True)
+    password_hash = Column(sa.String(65), nullable=False)
 
 class Books(Base):
     """Book details"""

@@ -1,4 +1,5 @@
-# LIB SUPERVISOR
+# Lib Man (A Library Manager)
+Nothing special, just a fullstack app for library management :) [More like a simple project build within 1.5 days buffer] 
 
 ## Running the server
 > **NB**: there is a simple to use Makefile

@@ -1,0 +1,11 @@
+:root {
+    --main-bg: #fafafa;
+}
+
+.dark {
+    --main-bg: #2b2b2b;
+}
+/* 
+@media (prefers-color-scheme: dark) {
+    
+} */

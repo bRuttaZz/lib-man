@@ -1,4 +1,4 @@
-import { ajax } from "./lib/utils.js"
+import { URL_PREFIX, ajax } from "./lib/utils.js"
 import { LOGIN_WARNING } from "./lib/messages.js"
 
 function bindButton() {
@@ -58,7 +58,7 @@ function bindButton() {
             e.target.innerHTML = `Login`
         }
         ajax(
-            "/api/admin/login",
+            `${URL_PREFIX}/api/admin/login`,
             "POST",
             { username: usernameField.value, password: passwordField.value }
         )
@@ -69,7 +69,7 @@ function bindButton() {
                     return
                 }
                 errorRegion.innerText = ""
-                window.location.href = "/"
+                window.location.href = `${URL_PREFIX}/`
                 onComplete()
             })
             .catch(err => {
@@ -79,11 +79,18 @@ function bindButton() {
             })
     })
 
+    // print previous error cases if any 
+    const preError = sessionStorage.getItem("re-login-cause")
+    if (preError) {
+        errorRegion.innerText = preError;
+        sessionStorage.removeItem("re-login-cause");
+    }
+
     // do a test (for checking if already verified)
-    ajax("/api/admin/test-session", "POST")
+    ajax(`${URL_PREFIX}/api/admin/test-session`, "POST")
         .then(dat => { 
             if (dat.status === 200){
-                window.location.href = "/"
+                window.location.href = `${URL_PREFIX}/`
             }
         })
         .catch(e=>{console.log("no existing valid sessions : ", e.status)})

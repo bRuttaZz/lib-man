@@ -28,6 +28,8 @@ and then start running the system, it will take `example.env` as the config file
 1. there is only one admin user
 2. default username and password : `admin` and `passowrd` respectively can be change latter on using the env variable. 
 
+## about the api calling
+1. Just beacuse I am not that sure about the internet access facility in pythonanywhere, calling the API to import books directly from the browser (I knw it's dump)
 
 ## Tools and Libs
 1. Flask 

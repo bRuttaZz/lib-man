@@ -29,18 +29,15 @@ def verify_login(inputs:LoginRequest):
 def test_session():
     return {"status": True}, 200
 
-@admin_apis.post("/user", endpoint="user")
+@admin_apis.post("/update-password", endpoint="user")
 @validate_input(input_model=AdminUpdateRequest)
 @validate_session(False)
 def update_admin(inputs:AdminUpdateRequest):
     if inputs.super_user_password != ADMIN_PASSWORD_CHANGER_KEY:
         return {"sueccess": False, "detail": "NOT_AUTHENTICATED"}, 403
     with Session() as db:
-        updates = { key: val
-            for key, val in {
-                "username": inputs.new_username, 
-                "password_hash": inputs.new_password
-            }.items() if val
-        }
-        db.query(Admin).filter(Admin.username == inputs.username).update(updates) 
+        db.query(Admin).filter(Admin.username == inputs.username).update({
+            "password_hash": inputs.new_password
+        }) 
+        db.commit()
     return {"success": True}

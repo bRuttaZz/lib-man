@@ -7,8 +7,8 @@ from sqlalchemy import engine_from_config, create_engine
 from sqlalchemy import pool, MetaData, Table
 from sqlalchemy.orm import sessionmaker
 
-from src.db import Base, db_connection_string, db_connection_args
-from src.settings import IGNORE_MIGRATIONS_IF_NOT_FOUND
+from server.db import Base, db_connection_string, db_connection_args
+from server.settings import IGNORE_MIGRATIONS_IF_NOT_FOUND
 
 
 

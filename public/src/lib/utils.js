@@ -1,3 +1,5 @@
+export const URL_PREFIX  = document.querySelector(".config-elem")?.dataset?.urlPrefix  || "";
+
 /**
  * Yet an another implementation of ajax call :) 
  * Noo! Actually I dont hate jquery

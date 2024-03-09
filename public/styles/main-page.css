@@ -42,7 +42,7 @@
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
     height: 30px;
-    width: 90px;
+    width: 100px;
     font-size: small;
     outline: 0;
     border: 0;  
@@ -83,4 +83,8 @@
     background-color: var(--accent-bg-color2);
     color: var(--main-text-color);
     /* font-weight: 600; */
+}
+
+.book-number-selection {
+    width: 3rem;
 }

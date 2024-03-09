@@ -1,4 +1,4 @@
-from src.server import create_app
+from server.server import create_app
 
 app = create_app()
 
@@ -11,11 +11,11 @@ if __name__ == "__main__":
             app.run(port=int(os.getenv("PORT", 8000)), host="0.0.0.0", debug=True)
             sys.exit(0)
         elif sys.argv[1] == "make-migrations":
-            from src.db.migrations import make_migrations
+            from server.db.migrations import make_migrations
             make_migrations()
             sys.exit(0)
         elif sys.argv[1] == "migrate":
-            from src.db.migrations import migrate
+            from server.db.migrations import migrate
             migrate()
             sys.exit(0)
     print(f"""Invalid usage of script!

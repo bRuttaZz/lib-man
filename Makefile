@@ -29,15 +29,15 @@ help:
 	@echo -e ""
 
 
-start: main.py src 
+start: main.py server
 	@gunicorn main:app -w $(WORKERS) -t $(SREVER_TIMEOUT) --bind "0.0.0.0:$(PORT)"
 
-dev: main.py src
+dev: main.py server
 	@CONFIG_TYPE=$(CONFIG_TYPE) PORT=$(PORT) python3 main.py run
 
-make-migrations: main.py src
+make-migrations: main.py server
 	@CONFIG_TYPE=$(CONFIG_TYPE) python3 main.py make-migrations
 
-migrate: main.py src
+migrate: main.py server
 	@CONFIG_TYPE=$(CONFIG_TYPE) python3 main.py migrate
 

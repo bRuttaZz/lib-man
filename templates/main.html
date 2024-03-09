@@ -308,18 +308,27 @@
             <!-- =================================================================================== -->
 
             <div id="footer-button" class="d-none">
-                <div class="justify-content-center d-flex">
-                    <span class="mt-3 mb-2 load-more-btn ps-3 pe-3 small p-1">load more</span>
+                <div class="justify-content-center d-flex page-switcher">
+                    <span class="mt-3 mb-2 load-more-btn p-1 ps-3 pe-3 small">1</span>
                 </div>
             </div>
 
             <!-- =================================================================================== -->
 
+            <div id="wrong-div" class="d-none">
+                <div class="text-danger justify-content-center d-flex page-switcher">
+                    Something went wrong! Please try again.. (Probably you can try refreshing the tab)
+                </div>
+            </div>
+
+            <!-- =================================================================================== -->
+
+
         </div>
     </div>
 
-    <script src="{{ URL_PREFIX }}/static/src/index.js" type="module"></script>
-    <script src="{{ URL_PREFIX }}/static/src/main-page.js" type="module"></script>
+    <script src="{{ URL_PREFIX }}/static/js/index.bundle.js" type="module"></script>
+    <script src="{{ URL_PREFIX }}/static/js/main-page.bundle.js" type="module"></script>
 </body>
 <config class="d-none config-elem" data-url-prefix="{{ URL_PREFIX }}"></config>
 

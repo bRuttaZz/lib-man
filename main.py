@@ -8,7 +8,12 @@ if __name__ == "__main__":
     # I am feeling lazy to implement an argparser based cli
     if len(sys.argv) > 1:
         if sys.argv[1] == "run":
-            app.run(port=int(os.getenv("PORT", 8000)), host="0.0.0.0", debug=True)
+            app.run(
+                port=int(os.getenv("PORT", 8000)), 
+                host="0.0.0.0", 
+                debug=True,
+                ssl_context=('ssl/cert.pem', 'ssl/key.pem'),
+            )
             sys.exit(0)
         elif sys.argv[1] == "make-migrations":
             from server.db.migrations import make_migrations

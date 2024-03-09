@@ -19,6 +19,8 @@ help:
 	@echo -e "	dev  \t\t: To start a development server in debug mode "
 	@echo -e "	make-migrations\t: To make new databse migrations" 
 	@echo -e "	migrate \t: To apply migrations" 
+	@echo -e "	build \t\t: To build the front end" 
+	@echo -e "	setup \t\t: To setup the environment for the first time." 
 	@echo -e ""
 	@echo -e "configurations:"
 	@echo -e "	environment-variables:"
@@ -30,10 +32,11 @@ help:
 
 
 start: main.py server
-	@gunicorn main:app -w $(WORKERS) -t $(SREVER_TIMEOUT) --bind "0.0.0.0:$(PORT)"
+	@gunicorn main:app -w $(WORKERS) -t $(SREVER_TIMEOUT) --bind "0.0.0.0:$(PORT)" \
+		--certfile=ssl/cert.pem --keyfile=ssl/key.pem
 
-dev: main.py server
-	@CONFIG_TYPE=$(CONFIG_TYPE) PORT=$(PORT) python3 main.py run
+dev: main.py server package.json
+	@npm run dev & CONFIG_TYPE=$(CONFIG_TYPE) PORT=$(PORT) python3 main.py run
 
 make-migrations: main.py server
 	@CONFIG_TYPE=$(CONFIG_TYPE) python3 main.py make-migrations
@@ -41,3 +44,9 @@ make-migrations: main.py server
 migrate: main.py server
 	@CONFIG_TYPE=$(CONFIG_TYPE) python3 main.py migrate
 
+build: package.json
+	@npm run build
+
+setup: requirements.txt package.json
+	@npm i
+	@pip install -r requirements.txt 

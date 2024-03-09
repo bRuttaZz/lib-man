@@ -18,7 +18,7 @@ load_dotenv(dotenv_path=f"{os.getenv('CONFIG_TYPE', '')}.env")
 VAR_DIR = os.path.join(_dirname, "..", "var")
 
 TEMPLATE_DIRECTORY=os.path.join(_dirname, "..", "templates")
-STATIC_DIRECTORY=os.path.join(_dirname, "..",  "public")
+STATIC_DIRECTORY=os.path.join(_dirname, "..",  "public", "static")
 URL_PREFIX=os.getenv("URL_PREFIX", "")
 
 DB_CONFIG = {

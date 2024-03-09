@@ -1,5 +1,5 @@
-import { URL_PREFIX, deleteAllCookies, ajax } from "../utils.js"
-import { informModal } from "../ui.js"
+import { URL_PREFIX, deleteAllCookies, ajax } from "../utils/index.js"
+import { informModal } from "../utils/ui.js"
 import { ADMIN_CENTER_WARNING, LOGIN_WARNING, INFORM_MODAL_HEADER, INFORM_MODAL_MESSAGE } from "../messages.js"
 import { bindTabListeners } from "./tabsetup.js"
 

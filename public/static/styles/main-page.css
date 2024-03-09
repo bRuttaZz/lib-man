@@ -80,7 +80,7 @@
 
 .data-container .load-more-btn {
     border-radius: 5px;
-    background-color: var(--accent-bg-color2);
+    background-color: var(--ter-bg);
     color: var(--main-text-color);
     /* font-weight: 600; */
 }

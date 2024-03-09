@@ -30,6 +30,9 @@ and then start running the system, it will take `example.env` as the config file
 
 ## about the api calling
 1. Just beacuse I am not that sure about the internet access facility in pythonanywhere, calling the API to import books directly from the browser (I knw it's dump)
+2. But there was a difficulty due to the server's cross origin policy. So I am going with JSONP
+**I admit! Not a good method at all. Anyway doing this for hosting on pythonanywhere for free. (I want that extra brownie)**
+3. Okay there is no other way I am forced to go with Docker way
 
 ## Tools and Libs
 1. Flask 

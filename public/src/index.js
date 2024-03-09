@@ -1,5 +1,5 @@
 // common code
-import { bindThemeSwitch } from "./lib/ui.js"
+import { bindThemeSwitch } from "./lib/utils/ui.js"
 
 function main() {
     bindThemeSwitch()

@@ -1,4 +1,4 @@
-export const URL_PREFIX  = document.querySelector(".config-elem")?.dataset?.urlPrefix  || "";
+export const URL_PREFIX = document.querySelector(".config-elem")?.dataset?.urlPrefix || "";
 
 /**
  * Yet an another implementation of ajax call :) 

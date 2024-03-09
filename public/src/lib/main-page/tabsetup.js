@@ -9,6 +9,8 @@ import {
     getFooterLoadBtn,
     getTopButton,
 } from "./components.js"
+import { errorCase } from "../utils/ui.js"
+import { searchNewBooks } from "./apis.js"
 
 export const TabState = {
     currentTab: "booksTab",
@@ -16,12 +18,17 @@ export const TabState = {
 
 export function bindTabListeners() {
     document.getElementById("nav-bar").addEventListener("tabSwtich", e => {
+        errorCase(false)
+        DomMan.clearDataBody()
+        DomMan.appendDataBody(getLoaderPlaceHolder())
+
         let dataHandlerBtn = "";
         switch (e.detail.tabName) {
             case "booksTab" :
                 break;
             
             case "importBooksTab":
+                searchNewBooks()
                 break;
                 
             case "readersTab" :
@@ -39,9 +46,7 @@ export function bindTabListeners() {
                 break;
         }
         DomMan.replaceDataHeader(dataHandlerBtn)
-        DomMan.clearDataBody()
         DomMan.replaceFooter("")
-        DomMan.appendDataBody(getLoaderPlaceHolder())
         SearchSelectorItems.setSelectorList(e.detail.tabName)
         TabState.currentTab = e.detail.tabName;
     });

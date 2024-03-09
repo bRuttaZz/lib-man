@@ -1,5 +1,6 @@
 import logging
 from flask import Flask, send_from_directory
+from flask_cors import CORS
 
 from ..settings import (
     URL_PREFIX, 
@@ -20,6 +21,9 @@ def create_app():
         static_folder=STATIC_DIRECTORY,
         static_url_path=f"{URL_PREFIX}/static",
     )
+    CORS(app, origins=[
+        "self", 
+    ])
 
     # setting favicon 
     @app.route(f"{URL_PREFIX}/favicon.ico")

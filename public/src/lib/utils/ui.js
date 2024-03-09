@@ -78,3 +78,15 @@ export function informModal(msg, heading, buttonName) {
     });
 
 }
+
+/**
+ * The fallback (apologies) for error case
+ * @param {Boolean} [error] - to remove the div or not
+ */
+export function errorCase(error=true) {
+    if (error) 
+        document.querySelector("#wrong-div")?.classList.remove("d-none")
+    else 
+        document.querySelector("#wrong-div")?.classList.add("d-none")
+    
+}

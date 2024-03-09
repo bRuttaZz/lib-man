@@ -246,29 +246,9 @@ export class SearchSelectorItems {
                 placeholder: "Search for ISBN",
             },
             {
-                display: "ISBN13",
-                value: "isbn13",
-                placeholder: "Search for ISBN13",
-            },
-            {
-                display: "Rating",
-                value: "average_rating",
-                placeholder: "Search for book-rating",
-            },
-            {
                 display: "Publisher",
                 value: "publisher",
                 placeholder: "Search the name of publishers",
-            },
-            {
-                display: "Lang",
-                value: "language_code",
-                placeholder: "Search for language code",
-            },
-            {
-                display: "Id",
-                value: "bookID",
-                placeholder: "Search for book id!",
             },
         ],
         readersTab: [

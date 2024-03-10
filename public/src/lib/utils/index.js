@@ -54,3 +54,23 @@ export function deleteAllCookies() {
         document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
     }
 }
+
+/**
+ * Field validators
+ */
+export class FieldValidators {
+    static emailRegex = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+    static indianMobileRegex = /^[6789]\d{9}$/;
+
+    static emailValidator(string) {
+        return this.emailRegex.test(string);
+    }
+
+    static phoneValidator(string) {
+        return this.indianMobileRegex.test(string);
+    }
+
+    static lengthChecker(string, min, max) {
+        return min < string.length && max > string.length ? true : false
+    }
+}

@@ -93,7 +93,7 @@ export function getNewBookCard(options) {
  * @param {Object} options 
  * @param {String} options.name - name of the reader
  * @param {String} options.email - email of the reader
- * @param {String} options.phone - phone of the reader
+ * @param {String} options.phone_number - phone of the reader
  * @param {String} options.numBooksInHand - number of bookes currently handled by the reader
  * @param {String} options.debt - total debt
  * @param {String} options.id - memebership id
@@ -104,7 +104,7 @@ export function getReaderCard(options) {
     return constructComponentFromDom("data-card-reader", {
         READER_NAME: options.name,
         EMAILID_READER: options.email,
-        PHONENUM_READER: options.phone,
+        PHONENUM_READER: options.phone_number,
         BOOKS_IN_HAND: options.numBooksInHand,
         TOTAL_DEBT: options.debt,
         MEMEBER_ID: options.id
@@ -267,11 +267,6 @@ export class SearchSelectorItems {
                 display: "Email",
                 value: "email",
                 placeholder: "Search for email id",
-            },
-            {
-                display: "Id",
-                value: "id",
-                placeholder: "Search for reader's id!",
             },
         ],
         transactionsTab: [

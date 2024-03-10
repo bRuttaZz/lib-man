@@ -15,11 +15,13 @@ export const ADMIN_CENTER_WARNING = {
 
 export const INFORM_MODAL_MESSAGE = {
     invalidSearchQuery: "Please check your search term. It's of invalid form!",
-    passwordResetSuccess: "Password reset successfull!",
+    passwordResetSuccess: "Password reset successful!",
     importNewBooks: `You are about to import <span class="text-warning">NUMBER_OF</span> books. Are we good to go?`,
     importNewBooksError: `Error importing new books :(`,
     importMaxLimit: `Only 10 books can be imported at a time!`,
-    importNewBooksSuccess: `Books imported successfully!`
+    importNewBooksSuccess: `Books imported successfuly!`,
+    readerOperationSuccess: `Operation on Reader successful! `,
+    readerOperationFailuer: `Operation on Reader was unsuccessful!<br>Make sure you have provided a unique mobile/email.`,
 }
 
 export const INFORM_MODAL_HEADER = {
@@ -29,4 +31,12 @@ export const INFORM_MODAL_HEADER = {
     importNewBooksError: `<span class="mdi mdi-alert-circle"></span> Failure`,
     importMaxLimit: `<span class="mdi mdi-alert-circle"></span> Max Limit Exceeded!`,
     importNewBooksSuccess: `<span class="mdi mdi-check-circle"></span> Success`,
+    readerOperationSuccess: `<span class="mdi mdi-check-circle"></span> Success`,
+    readerOperationFailuer: `<span class="mdi mdi-alert-circle"></span> Failure`,
+}
+
+export const CUSTOMER_CENTER_WARNING = {
+    invalidEmail: "Invalid email ID",
+    invalidPhone: "Invalid Phone number",
+    invalidUsername: "Username should be between 3 to 15 characters!",
 }

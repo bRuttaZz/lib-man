@@ -38,9 +38,11 @@ class Books(Base):
     text_reviews_count = Column(sa.Integer())
     publication_date = Column(sa.Date())
     publisher = Column(sa.String(125))
-
     # book keeping values
     bookCount = Column(sa.Integer(), default=1)
+
+    transactions = relationship("Transactions", backref="book")
+
 
 class Members(Base):
     """Member details"""
@@ -49,6 +51,8 @@ class Members(Base):
     name = Column(sa.String(50), nullable=False)
     phone_number = Column(sa.String(10), unique=True, nullable=False)
     email = Column(sa.String(50), unique=True, nullable=False)
+
+    transactions = relationship("Transactions", backref="member")
 
 class Transactions(Base):
     """Transaction details"""
@@ -61,8 +65,6 @@ class Transactions(Base):
     reader_id = Column(sa.Integer(), ForeignKey("members.id"))
     book_id = Column(sa.Integer(), ForeignKey("books.id"))
 
-    reader = relationship("Members", backref="transactions")
-    book = relationship("Books", backref="transactions")
 
 
 

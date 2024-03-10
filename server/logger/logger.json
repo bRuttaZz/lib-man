@@ -4,6 +4,7 @@
         "level": "debug",
         "rotation": "30 days",
         "retention": "2 months",
-        "format": "<level>{level: <5} </level><green>{time:DD-MM-YYYY HH:mm:ss}</green> :<yellow>{extra[request_id]}</yellow>: <level>{message}</level>"
+        "format": "<level>{level: <5} </level><green>{time:DD-MM-YYYY HH:mm:ss}</green> :<yellow>{extra[request_id]}</yellow>: <level>{message}</level>",
+        "comment-item": "can add this string for function visibility : <cyan>{function}</cyan>"
     }
 }

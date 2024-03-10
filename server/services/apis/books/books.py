@@ -69,7 +69,6 @@ def get_books():
         q = db.query(Books)
         for key, val in params.items():
             if val:
-                print(key, val)
                 q = q.filter(getattr(Books, key).contains(val))
         data, total_count = paginate(q, page_number, 20)
     return {

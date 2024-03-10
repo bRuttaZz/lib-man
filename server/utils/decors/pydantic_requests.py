@@ -7,6 +7,7 @@ def validate_input(input_model:BaseModel):
     def dec(handler:callable):   
         def modified_handler(*args, **kwargs):
             dat = request.get_json(force=True, silent=True)
+            dat = dat if dat else {}
             if not isinstance(dat, dict):
                 logging.warning(f"[request err] : jsonification error :!")
                 return {"success": False, "detail": "UNPREOCESSIBLE_ENTITY"}, 422

@@ -27,7 +27,6 @@ export function searchBooks(options) {
             url += `&${key}=${encodeURIComponent(options[key])}`
         }
         DomMan.clearDataBody()
-        DomMan.replaceDataHeader("")
         DomMan.appendDataBody(getLoaderPlaceHolder())
         PageToggle.clearFooter()
 
@@ -41,12 +40,8 @@ export function searchBooks(options) {
                 DomMan.clearDataBody()
                 let books = ""
                 dat.json.message.forEach(book => {
-                    const keys = {}
-                    for (let key in book) {
-                        keys[key] = book[key]
-                    }
-                    DomMan.appendCurrentBodyItems(keys.bookID, keys)
-                    books += getBookCard(keys)
+                    DomMan.appendCurrentBodyItems(book.bookID, book)
+                    books += getBookCard(book)
                 });
                 DomMan.appendDataBody(books)
                 // getBookIncrementKeyBind()   // binding book increment handler

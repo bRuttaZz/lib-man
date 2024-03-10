@@ -34,6 +34,8 @@ and then start running the system, it will take `example.env` as the config file
 **I admit! Not a good method at all. Anyway doing this for hosting on pythonanywhere for free. (I want that extra brownie)**
 3. Okay there is no other way I am forced to go with Docker way
 
+4. for a straight forward CRUD operation have a look into reader's section
+
 ## Tools and Libs
 1. Flask 
 2. Alembic

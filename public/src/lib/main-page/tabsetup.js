@@ -13,6 +13,7 @@ import {
 import { errorCase } from "../utils/ui.js"
 import { searchNewBooks } from "./tabs/newbooks.js"
 import { searchBooks } from "./tabs/books.js"
+import { searchReaders, bindAddButton, bindReaderCardValidators } from "./tabs/readers.js"
 
 
 /**
@@ -23,7 +24,7 @@ function bindPageToggle() {
     container.addEventListener("pageChangeTriger", (e) => {
         switch (e.detail.tabName) {
             case "booksTab":
-                searchBooks({...e.detail.param, page: e.detail.page})
+                searchBooks({ ...e.detail.param, page: e.detail.page })
                 break;
 
             case "importBooksTab":
@@ -31,6 +32,7 @@ function bindPageToggle() {
                 break;
 
             case "readersTab":
+                searchReaders({ ...e.detail.param, page: e.detail.page })
                 break;
 
             case "transactionsTab":
@@ -42,14 +44,14 @@ function bindPageToggle() {
 /**
  * register the functionalities of key strokes 
  */
-function registerButtonGestures(){
+function registerButtonGestures() {
     const searchbar = document.querySelector("#major-search-bar")
     const searchbtn = document.querySelector(".major-search-btn")
-    
-    document.addEventListener("keydown", (e)=>{
-        switch(e.code) {
+
+    document.addEventListener("keydown", (e) => {
+        switch (e.code) {
             case "Enter":
-                if (document.activeElement === searchbar) 
+                if (document.activeElement === searchbar)
                     searchbtn.click()
                 break
         }
@@ -65,20 +67,20 @@ function bindSearchBar() {
     const selector = document.querySelector(".searchbar-pre")
     btn.addEventListener("click", () => {
         const params = {}
+        if (bar.value && selector.value)
+            params[selector.value] = bar.value
+
         switch (sessionStorage.getItem("currentTab")) {
             case "booksTab":
-                if (bar.value && selector.value)
-                    params[selector.value] = bar.value
                 searchBooks(params)
                 break;
 
             case "importBooksTab":
-                if (bar.value && selector.value)
-                    params[selector.value] = bar.value
                 searchNewBooks(params)
                 break;
 
             case "readersTab":
+                searchReaders(params)
                 break;
 
             case "transactionsTab":
@@ -91,6 +93,7 @@ function bindSearchBar() {
  * 
 */
 export function bindTabListeners() {
+    bindReaderCardValidators();
     bindPageToggle();
     PageToggle.bindToggler()
     document.getElementById("nav-bar").addEventListener("tabSwtich", e => {
@@ -98,6 +101,7 @@ export function bindTabListeners() {
         DomMan.clearDataBody()
         DomMan.appendDataBody(getLoaderPlaceHolder())
         PageToggle.clearFooter()
+        DomMan.replaceDataHeader("")
 
         let dataHandlerBtn = "";
         switch (e.detail.tabName) {
@@ -110,6 +114,8 @@ export function bindTabListeners() {
                 break;
 
             case "readersTab":
+                bindAddButton()
+                searchReaders()
                 break;
 
             case "transactionsTab":

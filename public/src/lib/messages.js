@@ -14,9 +14,19 @@ export const ADMIN_CENTER_WARNING = {
 }
 
 export const INFORM_MODAL_MESSAGE = {
+    invalidSearchQuery: "Please check your search term. It's of invalid form!",
     passwordResetSuccess: "Password reset successfull!",
+    importNewBooks: `You are about to import <span class="text-warning">NUMBER_OF</span> books. Are we good to go?`,
+    importNewBooksError: `Error importing new books :(`,
+    importMaxLimit: `Only 10 books can be imported at a time!`,
+    importNewBooksSuccess: `Books imported successfully!`
 }
 
 export const INFORM_MODAL_HEADER = {
+    invalidSearchQuery: `<span class="mdi mdi-alert-circle"></span> Oops!`,
     passwordResetSuccess: `<span class="mdi mdi-check-circle"></span> Success`,
+    importNewBooks: `Import Books`,
+    importNewBooksError: `<span class="mdi mdi-alert-circle"></span> Failure`,
+    importMaxLimit: `<span class="mdi mdi-alert-circle"></span> Max Limit Exceeded!`,
+    importNewBooksSuccess: `<span class="mdi mdi-check-circle"></span> Success`,
 }

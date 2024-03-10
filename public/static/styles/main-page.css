@@ -88,3 +88,7 @@
 .book-number-selection {
     width: 3rem;
 }
+
+.current-page-btn {
+    opacity: 0.6;
+}

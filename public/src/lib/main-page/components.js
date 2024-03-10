@@ -21,7 +21,7 @@ function constructComponentFromDom(id, replaceObjs = {}) {
  * @param {Object} options
  * @param {String} options.title - name of books 
  * @param {String} options.authors - authors 
- * @param {String} options.bookId - id
+ * @param {String} options.bookID - id
  * @param {String} options.average_rating - rating 
  * @param {String} options.isbn - isbn
  * @param {String} options.isbn13 - isbn but 13char long 
@@ -44,12 +44,12 @@ export function getBookCard(options) {
         PUBLISHER: options.publisher,
         PUBLISH_DATE: options.publication_date,
         LANG_CODE: options.language_code,
-        RATING: options.RATING,
+        RATING: options.average_rating,
         RATER_COUNT: options.ratings_count,
         PAGES: options.num_pages,
         ISBN_: options.isbn,
-        ISBN13: options.isbn13,
-        BOOK_ID: options.bookId,
+        ISBN13_: options.isbn13,
+        BOOK_ID: options.bookID,
         AVAILABLE_COUNT: options.availableCount,
     })
 }
@@ -59,7 +59,7 @@ export function getBookCard(options) {
  * @param {Object} options
  * @param {String} options.title - name of books 
  * @param {String} options.authors - authors 
- * @param {String} options.bookId - id
+ * @param {String} options.bookID - id
  * @param {String} options.average_rating - rating 
  * @param {String} options.isbn - isbn
  * @param {String} options.isbn13 - isbn but 13char long 
@@ -79,12 +79,12 @@ export function getNewBookCard(options) {
         PUBLISHER: options.publisher,
         PUBLISH_DATE: options.publication_date,
         LANG_CODE: options.language_code,
-        RATING: options.RATING,
+        RATING: options.average_rating,
         RATER_COUNT: options.ratings_count,
         PAGES: options.num_pages,
         ISBN_: options.isbn,
-        ISBN13: options.isbn13,
-        BOOK_ID: options.bookId,
+        ISBN13_: options.isbn13,
+        BOOK_ID: options.bookID,
     })
 }
 
@@ -168,20 +168,31 @@ export function getTopButton(options) {
  * For dom manipulation
  */
 export class DomMan {
+    static dataHeader = document.getElementById("data-content-header")
+    static dataBody = document.getElementById("data-content-body")
     static replaceDataHeader(html) {
-        document.getElementById("data-content-header").innerHTML = html
+        this.dataHeader.innerHTML = html
     }
 
     static clearDataBody() {
-        document.getElementById("data-content-body").innerHTML = "";
+        this.dataBody.innerHTML = "";
+        this.dataBody.currentItems = {}
+    }
+
+    static appendCurrentBodyItems(key, val) {
+        this.dataBody.currentItems[key] = val;
+    }
+
+    static getCurrentBodyItem(key) {
+        return this.dataBody.currentItems[key] 
+    }
+
+    static removeCurrentBodyItem(key) {
+        delete this.dataBody.currentItems[key]
     }
 
     static appendDataBody(html) {
-        document.getElementById("data-content-body").innerHTML += html;
-    }
-
-    static replaceFooter(html) {
-        document.getElementById("data-content-footer").innerHTML = ""
+        this.dataBody.innerHTML += html;
     }
 }
 
@@ -209,11 +220,6 @@ export class SearchSelectorItems {
                 placeholder: "Search for ISBN13",
             },
             {
-                display: "Rating",
-                value: "average_rating",
-                placeholder: "Search for book-rating",
-            },
-            {
                 display: "Publisher",
                 value: "publisher",
                 placeholder: "Search the name of publishers",
@@ -222,11 +228,6 @@ export class SearchSelectorItems {
                 display: "Lang",
                 value: "language_code",
                 placeholder: "Search for language code",
-            },
-            {
-                display: "Id",
-                value: "bookID",
-                placeholder: "Search for book id!",
             },
         ],
         importBooksTab: [
@@ -283,12 +284,12 @@ export class SearchSelectorItems {
                 display: "Book",
                 value: "book_name",
                 placeholder: "Search for book's name",
-            }, 
+            },
             {
                 display: "ISBN",
                 value: "isbn",
                 placeholder: "Search for ISBN",
-            }, 
+            },
             {
                 display: "Status",
                 value: "transaction_status",
@@ -298,15 +299,15 @@ export class SearchSelectorItems {
                 display: "Id",
                 value: "transaction_id",
                 placeholder: "Search for transaction id",
-            }, 
+            },
         ],
     }
 
     static getSelectorList(itemtype) {
-        let html = "" 
+        let html = ""
         let firstItem = true
         this._items[itemtype]?.forEach(element => {
-            html += `<option ${firstItem?"selected":""} value="${element.value}" data-placeholder="${element.placeholder}">${element.display}</option>`
+            html += `<option ${firstItem ? "selected" : ""} value="${element.value}" data-placeholder="${element.placeholder}">${element.display}</option>`
             firstItem = false
         });
         return html
@@ -327,4 +328,95 @@ export class SearchSelectorItems {
     static bindAutoListener() {
         document.querySelector(".searchbar-pre").addEventListener("change", this.setSearchPlaceHolder)
     }
-} 
+}
+
+export class PageToggle {
+    static _neighborLength = 2
+
+    static _arrayRange(start, stop, step = 1) {
+        return Array.from(
+            { length: (stop - start) / step + 1 },
+            (value, index) => start + index * step
+        );
+    }
+
+
+    /**
+     * Bind listeners for page toggle
+     */
+    static bindToggler() {
+        const container = document.getElementById("footer-buttons")
+        container.addEventListener("click", (e) => {
+            const dat = {
+                param: container.pageToggleParams,
+                tabName: container.currentTabName,
+            }
+            if (e.target.classList.contains("page-btn")) {
+                container.dispatchEvent(new CustomEvent("pageChangeTriger", {
+                    detail: {
+                        page: e.target.innerText?.trim(),
+                        ...dat,
+                    }
+                }))
+            }
+            if (e.target.classList.contains("page-btn-next")) {
+                container.dispatchEvent(new CustomEvent("pageChangeTriger", {
+                    detail: {
+                        page: container.currentPage + 1,
+                        ...dat,
+                    }
+                }))
+            }
+            if (e.target.classList.contains("page-btn-pre")) {
+                container.dispatchEvent(new CustomEvent("pageChangeTriger", {
+                    detail: {
+                        page: container.currentPage - 1,
+                        ...dat,
+                    }
+                }))
+            }
+        })
+    }
+
+    /**
+     * set new footer items
+     * @param {number} min - minimum page cuont
+     * @param {number} max - maximum page count
+     * @param {number} current - current page count
+     * @param {Object} additionalParams - additional switch params
+     * @param {String} tabName - current tabname
+     */
+    static setFooter(max, current, additionalParams, tabName) {
+        max = parseInt(max)
+        current = parseInt(current)
+        const container = document.getElementById("footer-buttons")
+
+        const start = current <= this._neighborLength ? 1 : current - this._neighborLength;
+        const stop = max - current <= this._neighborLength ? max : current + this._neighborLength;
+        let html = ""
+        const fillings = '<span class="mt-3 mb-2 ms-1 p-1 small"> ... </span>'
+        if (start !== 1)
+            html += `<span class="mt-3 mb-2 ms-1 load-more-btn pointer p-1 ps-3 pe-3 small page-btn-pre"> < </span>${fillings}`
+        this._arrayRange(start, stop).forEach(el => {
+            if (el == current)
+                html += `<span class="mt-3 mb-2 ms-1 load-more-btn pointer p-1 ps-3 pe-3 small page-btn current-page-btn"> ${el} </span>`
+            else
+                html += `<span class="mt-3 mb-2 ms-1 load-more-btn pointer p-1 ps-3 pe-3 small page-btn"> ${el} </span>`
+        })
+        if (stop !== max)
+            html += `${fillings}<span class="mt-3 mb-2 load-more-btn pointer p-1 ps-3 pe-3 small page-btn-next"> > </span>`
+        container.innerHTML = html
+        container.currentPage = current
+        container.pageToggleParams = additionalParams
+        container.currentTabName = tabName
+    }
+
+    /** Clear current footer */
+    static clearFooter() {
+        const container = document.getElementById("footer-buttons")
+        container.innerHTML = ""
+        delete container.currentPage
+        delete container.pageToggleParams
+
+    }
+}

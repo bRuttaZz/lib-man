@@ -23,6 +23,8 @@
             <span class="fs-4" id="inform-modal-header"></span>
             <p id="inform-modal-body">Are you sure! You are about to logout from this session</p>
             <div class="d-flex justify-content-end">
+                <button class="btn btn-secondary me-2 fs-6 modal_close_button" data-close-item="#inform-modal"
+                    id="inform-modal-button-2">Cancel</button>
                 <button class="btn accent-color-2 me-2 fs-6 modal_close_button" data-close-item="#inform-modal"
                     id="inform-modal-button">Ok</button>
             </div>
@@ -111,8 +113,9 @@
                 <option selected>Name</option>
                 <option value="1">ISBN</option>
             </select>
-            <input id="major-search-bar" placeholder="Name of book" type="text" class="searchbar form-control text-box-bg shadow-none">
-            <button class="btn search-btn ms-1">search</button>
+            <input id="major-search-bar" placeholder="Name of book" type="text"
+                class="searchbar form-control text-box-bg shadow-none">
+            <button class="btn major-search-btn search-btn ms-1">search</button>
         </div>
         <div class="data-container mt-4">
             <div id="data-content-header">
@@ -121,16 +124,18 @@
             <div id="data-content-body">
                 <!-- data  -->
             </div>
-            <div id="data-content-footer">
-                <!-- footer  -->
+
+            <div id="footer-buttons" class="justify-content-center d-flex page-switcher">
+                <!-- <span class="mt-3 mb-2 load-more-btn p-1 ps-3 pe-3 small page-btn">1</span> -->
+                <!-- more page section -->
             </div>
 
             <!-- COMPONENTS  -->
             <!-- =================================================================================== -->
             <div id="top-buttons" class="d-none">
                 <!-- TOP BUTTONS READERS -->
-                <div id="top-btn-readers" class="justify-content-end d-flex">
-                    <span class="mt-3 mb-2 load-more-btn ps-3 pe-3 small p-1 BUTTON_CLASS_NAME">BUTTON_NAME</span>
+                <div id="top-btn-readers" class="justify-content-end d-flex p-1">
+                    <span class="mt-3 mb-2 ps-3 pe-3 small p-1 btn text-light accent-color-2 rounded-3 BUTTON_CLASS_NAME">BUTTON_NAME</span>
                 </div>
             </div>
             <!-- =================================================================================== -->
@@ -169,7 +174,7 @@
                         </div>
                         <div class="small">
                             <b><span class="data-author">AUTHORS</span></b>
-                            ( <span class="data-publisher">PUBLISHER</span> |
+                            ( <span class="data-publisher">PUBLISHER</span> @
                             <span class="data-publish-date">PUBLISH_DATE</span>
                             )
                         </div>
@@ -180,9 +185,9 @@
                                 class="data-rating-count">RATER_COUNT</span>
                         </div>
                         <div class="small">
-                            Pages : <span class="data-num-pages">PAGES</span> |
-                            ISBN : <span class="data-isbn">ISBN_</span> |
-                            ISBN13 : <span class="data-isbn13">ISBN13</span> |
+                            Pages : <span class="data-num-pages">PAGES</span> -
+                            ISBN : <span class="data-isbn">ISBN_</span> -
+                            ISBN13 : <span class="data-isbn13">ISBN13_</span> -
                             BookID : <b><span class="data-bookid">BOOK_ID</span></b>
                         </div>
                         <div class="small">
@@ -210,7 +215,7 @@
                         </div>
                         <div class="small">
                             <b><span class="data-author">AUTHORS</span></b>
-                            ( <span class="data-publisher">PUBLISHER</span> |
+                            ( <span class="data-publisher">PUBLISHER</span> @
                             <span class="data-publish-date">PUBLISH_DATE</span>
                             )
                         </div>
@@ -221,9 +226,9 @@
                                 class="data-rating-count">RATER_COUNT</span>
                         </div>
                         <div class="small">
-                            Pages : <span class="data-num-pages">PAGES</span> |
-                            ISBN : <span class="data-isbn">ISBN_</span> |
-                            ISBN13 : <span class="data-isbn13">ISBN13</span> |
+                            Pages : <span class="data-num-pages">PAGES</span> -
+                            ISBN : <span class="data-isbn">ISBN_</span> -
+                            ISBN13 : <span class="data-isbn13">ISBN13</span> -
                             BookID : <b><span class="data-bookid">BOOK_ID</span></b>
 
                         </div>
@@ -231,7 +236,7 @@
                     <div class="justify-content-center d-flex flex-column align-items-center col-1">
                         <div class="book-number-selection p-0">
                             <input type="number" class="form-control number-of-book-imports p-1" value="0"
-                                onkeydown="return false" min="0">
+                                onkeydown="return false" min="0" data-book-id="BOOK_ID">
                         </div>
                     </div>
                 </div>
@@ -258,7 +263,8 @@
                             </b>
                         </div>
                         <div class="small">
-                            books in possession : <b><span class="text-warning data-member-books-count">BOOKS_IN_HAND</span></b> |
+                            books in possession : <b><span
+                                    class="text-warning data-member-books-count">BOOKS_IN_HAND</span></b> |
                             total debt : <b class="text-danger">₹<span class="data-member-debt">TOTAL_DEBT</span></b>
                             <br> Membership ID : <b><span class="data-membership-id">MEMEBER_ID</span></b>
                         </div>
@@ -294,7 +300,8 @@
                             </b>
                         </div>
                         <div class="small">
-                            Transaction Closed : <b><span class="text-danger data-member-books-count">TRANSACT_STATUS</span></b>
+                            Transaction Closed : <b><span
+                                    class="text-danger data-member-books-count">TRANSACT_STATUS</span></b>
                         </div>
                     </div>
                     <div class="justify-content-center d-flex flex-column align-items-center col-1">

@@ -45,3 +45,5 @@ JWT_SESSION_SECRET=os.getenv("JWT_SESSION_SECRET", "asdfbakshj34r4ffsasdhfgakshs
 
 # key to change admin password
 ADMIN_PASSWORD_CHANGER_KEY = os.getenv("ADMIN_PASSWORD_CHANGER_KEY", "asecretkey")
+
+NEW_BOOK_API = os.getenv("NEW_BOOK_API", "https://frappe.io/api/method/frappe-library")

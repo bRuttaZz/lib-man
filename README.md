@@ -43,3 +43,5 @@ and then start running the system, it will take `example.env` as the config file
 6. pydantic
 
 
+## TODO
+1. has to migrate to sqlmodel to avoid sqlalachmey & pydantic related bug fixes

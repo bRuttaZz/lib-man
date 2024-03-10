@@ -288,13 +288,8 @@ export class SearchSelectorItems {
             {
                 display: "Status",
                 value: "transaction_status",
-                placeholder: "Search for transaction status",
-            },
-            {
-                display: "Id",
-                value: "transaction_id",
-                placeholder: "Search for transaction id",
-            },
+                placeholder: "Search for transaction status (Provide True/False)",
+            }
         ],
     }
 

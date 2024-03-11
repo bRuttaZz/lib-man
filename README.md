@@ -139,19 +139,12 @@ sdsd -->
 * ![](./misc/screens/firefox26.png)
 
 #### And the "responsive" samples
-
-* ![](./misc/screens/mobile-1.png)
-
-* ![](./misc/screens/mobile-2.png)
-
-* ![](./misc/screens/mobile-3.png)
-
-* ![](./misc/screens/mobile-4.png)
-
-* ![](./misc/screens/mobile-5.png)
-
-* ![](./misc/screens/mobile-6.png)
-
+<img src="./misc/screens/mobile-1.png" width="380px">
+<img src="./misc/screens/mobile-2.png" width="380px">
+<img src="./misc/screens/mobile-3.png" width="380px">
+<img src="./misc/screens/mobile-4.png" width="380px">
+<img src="./misc/screens/mobile-5.png" width="380px">
+<img src="./misc/screens/mobile-6.png" width="380px">
 
 
 ### ToDos

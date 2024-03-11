@@ -75,56 +75,6 @@ def get_member():
         "message": list(members.values()),
     }, 200
 
-    # and that solution got a weird pagination issues (I hate sql :)
-    # with Session() as db:
-    #     q = db.query(Members, Transactions)\
-    #         .outerjoin(Transactions, Members.id == Transactions.reader_id)\
-    #         .order_by(Members.name)
-    #     for key, val in params.items():
-    #         if val:
-    #             q = q.filter(getattr(Members, key).contains(val))
-    #     data, total_count = paginate(q, page_number, 20)
-    # logging.info(f"retrieving {len(data)} member count")
-    
-    # members = {}
-    # for member, transact in data:
-    #     print(member, transact.returned if transact else transact)
-    #     if member.id not in members:
-    #         members[member.id] = member.to_dict()
-    #         members[member.id]["numBooksInHand"] = 0
-    #         members[member.id]["debt"] = 0
-    #         members[member.id]["total_transacts"] = 0
-    #     if transact is not None:
-    #         members[member.id]["total_transacts"] += 1
-    #         if not transact.returned:
-    #             members[member.id]["numBooksInHand"] += 1
-    #             members[member.id]["debt"] += SINGLE_BOOK_RENT
-    # return {
-    #     "success": True, 
-    #     "total_count": total_count, 
-    #     "message": list(members.values()),
-    # }, 200
-    
-    # single query direct method is not working out! wasn't figured out
-    # with Session() as db:
-    #     q = db.query(Members, func.count(Transactions.id).label("transact_count"), func.sum(Transactions.returned).label("transact_count_"))\
-    #             .outerjoin(Transactions, Members.id == Transactions.reader_id) \
-    #             .group_by(Members.id) 
-    #     for key, val in params.items():
-    #         if val:
-    #             q = q.filter(getattr(Members, key).contains(val))
-    #     data, total_count = paginate(q, page_number, 20)
-    # members = []
-    # for member, transact_count, _ in data:
-    #     print(transact_count, _)
-    #     members.append({**member.to_dict(), "numBooksInHand": transact_count, 
-    #                     "debt": transact_count*SINGLE_BOOK_RENT})      
-    # return {
-    #     "success": True, 
-    #     "total_count": total_count, 
-    #     "message": members,
-    # }, 200
-
 
 @reader_apis.post("/member", endpoint="update_member")
 @validate_session(redirect_req=f"{URL_PREFIX}/login")

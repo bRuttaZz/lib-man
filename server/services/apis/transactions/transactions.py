@@ -1,11 +1,14 @@
 import logging
+import datetime
 from flask import Blueprint, request
+from sqlalchemy import or_
 from ....utils.decors.pydantic_requests import validate_input 
 from ....utils.decors.authenticate import validate_session 
 from ....settings import URL_PREFIX
 from ....db.models import Transactions, Members, Books
 from ....db import Session
 from ....db.utils import paginate
+from ....settings import SINGLE_BOOK_RENT, BOOK_RENT_MAX_PER_PERSON
 
 from .request_models import SearchTransactions, CreateTransaction, DeleteTransaction, UpdateTransaction
 
@@ -68,8 +71,33 @@ def put_transactions(data:CreateTransaction):
         book = db.query(Books).get(data.book_id)
         member = db.query(Members).get(data.reader_id)
         if not book or not member:
-            return {"success": False, "detail": "book/member not found"}, 400
+            return {"success": False, "detail": "book/member not found", "msg": "book and/or member not found!"}, 400
         
+        dat = db.query(Transactions.id, Transactions.book_id, Transactions.reader_id)\
+            .filter(Transactions.returned==False)\
+            .filter(
+                or_(Transactions.reader_id == data.reader_id, Transactions.book_id == data.book_id)
+            ).all()
+        book_count = 0
+        reader_borrow_count = 0
+        for _, bid, rid in dat:
+            if rid == data.reader_id: reader_borrow_count += 1
+            if bid == data.book_id: book_count += 1
+        
+        if not book_count < book.bookCount:
+            # book shortage
+            return {
+                "success": False, 
+                "detail": "book_shortage", 
+                "msg": f"The specified book ({data.book_id}) got shortage!"
+            }, 400
+        if (reader_borrow_count + 1) * SINGLE_BOOK_RENT > BOOK_RENT_MAX_PER_PERSON:
+            # rent debt exceeded
+            return {
+                "success": False, 
+                "detail": "rent_debt_exceeded", 
+                "msg": f"Maximum debt limit of {BOOK_RENT_MAX_PER_PERSON} has exceeded for this member!"
+            }, 400
         dat = Transactions(book=book, member=member)
         db.add(dat)
         db.commit()
@@ -84,6 +112,9 @@ def update_transactions(data:UpdateTransaction):
         transc = db.query(Transactions).get(data.id)
         if transc:
             transc.returned = data.returned
+            if data.returned:
+                transc.returned_at = datetime.datetime.utcnow()
+            
             db.commit()
         return {"success": True}, 200
     

@@ -42,7 +42,8 @@ function bindReaderCardEditButton() {
             document.querySelector("#reader-email-field").value = el.dataset.email
             document.querySelector("#reader-email-field").disabled = true;
 
-            document.getElementById("delete-member-field").classList.remove("d-none")
+            if (el.dataset.delete === "true")
+                document.getElementById("delete-member-field").classList.remove("d-none")
             document.getElementById("reader-modal").classList.remove("d-none")
             button.dispatchEvent(new Event("updateChecks"))
             button.classList.add("disabled")

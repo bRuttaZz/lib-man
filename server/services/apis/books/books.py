@@ -9,7 +9,7 @@ from ....db.models import Books, Transactions
 from ....db import Session
 from ....db.utils import paginate
 
-from .request_models import PutBooks, SearchBook
+from .request_models import PutBooks, SearchBook, DeleteOrUpdateBook
 
 books_apis = Blueprint('books_apis', __name__)
 
@@ -90,3 +90,45 @@ def get_books():
         "message": list(data.values()), 
         "total_count": total_count
     }, 200
+
+@books_apis.delete(f"{URL_PREFIX}/books")
+@validate_input(input_model=DeleteOrUpdateBook)
+@validate_session(redirect_req=f"{URL_PREFIX}/login")
+def update_or_remove_books(data: DeleteOrUpdateBook):
+    with Session() as db:
+        q = db.query(Books.id, Books.bookCount, Transactions.returned)\
+            .outerjoin(Transactions, Books.id == Transactions.book_id)\
+            .filter(Books.id.in_(data.books.keys())).all()
+        print(q)
+        book_state = {}
+        for id, total, returned in q:
+            if id not in book_state: book_state[id] = {"total": total, "occupied":0}
+            if returned is False: book_state[id]["occupied"] += 1
+        available_books = {el: val["total"] - val["occupied"]  for el, val in book_state.items()}
+        total_books = {el: val["total"] for el, val in book_state.items()}
+
+        # validate and classify
+        logging.debug("validating book delete entries")
+        in_books = data.model_dump()["books"]
+        remove_items = []
+        update_items = {}
+        for id, remove_count in in_books.items():
+            # check with avialble books
+            if (available_books[id]<remove_count):
+                return {"success": False, "detail": "INVALID_DATA"}, 400
+            #check with total books
+            if (total_books[id]==remove_count):
+                remove_items.append(id)
+            else:
+                update_items[id] = remove_count
+        logging.debug(f"{len(remove_items)} to remove, {len(update_items)} to update!")    
+        # removing items if any
+        if remove_items:
+            db.query(Books).filter(Books.id.in_(remove_items)).delete(synchronize_session='fetch')
+        if update_items:
+            for dat in db.query(Books).filter(Books.id.in_(update_items.keys())).all():
+                dat.bookCount -= update_items[dat.id]
+        db.commit()
+        logging.info(f"books update : {len(remove_items)} removed, {len(update_items)} updated!")
+
+    return {"success": True}, 200

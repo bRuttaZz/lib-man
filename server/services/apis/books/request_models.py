@@ -46,3 +46,11 @@ class SearchBook(BaseModel):
     language_code: str = Field("", description="lang code of the book", min_length=1, max_length=10)
     publisher:str = Field("", description="publisher of the book", min_length=1, max_length=125)
     page:int = Field(1, description="page number")
+
+class DeleteOrUpdateBook(BaseModel):
+    books :dict[int, int] = Field(..., description="dictionary maping of book index to number of books to remove", )
+
+    @model_validator(mode="after")
+    def length_checker(self):
+        if len(self.books.keys()) > 10:
+            raise Exception("exceed_input_max_limit") 

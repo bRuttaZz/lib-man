@@ -29,6 +29,9 @@ export const INFORM_MODAL_MESSAGE = {
     transactUpdateSuccess: `Transaction updated successfully!`,
     transactDeleteSuccess: `Transaction deleted successfully!`,
     transactupdateFailure: `Error updating transaction! Kindly contact your admin (I mean bRuttaZz)`,
+    bookdeleteLimitExceeded: `Maximum of only 10 books are allowed to delete at a time. Please try again!`,
+    bookDeleteSuccess: `Successfully deleted selected books!`,
+    bookDeleteFail: `An error occured while deleting the books!`,
 }
 
 export const INFORM_MODAL_HEADER = {
@@ -43,6 +46,9 @@ export const INFORM_MODAL_HEADER = {
     transactSuccess: `<span class="mdi mdi-check-circle"></span> Success`,
     transactionFailture: `<span class="mdi mdi-alert-circle"></span> Failure`,
     askTransactDelete: `<span class="mdi mdi-alert-circle"></span> <b>sudo</b> required!`,
+    bookdeleteLimitExceeded: `<span class="mdi mdi-alert-circle"></span> Failure`,
+    bookDeleteSuccess: `<span class="mdi mdi-check-circle"></span> Success`,
+    bookDeleteFail: `<span class="mdi mdi-alert-circle"></span> Failure`,
 
 }
 

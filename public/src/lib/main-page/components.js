@@ -51,6 +51,8 @@ export function getBookCard(options) {
         ISBN13_: options.isbn13,
         BOOK_ID: options.bookID,
         AVAILABLE_COUNT: options.availableCount,
+        CURRENT_VALUE_COUNT: options.availableCount,
+        MAX_VALUE_COUNT: options.availableCount,
     })
 }
 
@@ -107,7 +109,8 @@ export function getReaderCard(options) {
         PHONENUM_READER: options.phone_number,
         BOOKS_IN_HAND: options.numBooksInHand,
         TOTAL_DEBT: options.debt,
-        MEMEBER_ID: options.id
+        MEMEBER_ID: options.id,
+        DELETE_BUTTON: options.debt?"false":"true",
     })
 }
 

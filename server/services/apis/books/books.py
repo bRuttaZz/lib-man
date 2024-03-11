@@ -1,11 +1,11 @@
 import logging
 import requests
-from sqlalchemy import update
+from sqlalchemy import update, func
 from flask import Blueprint, request
 from ....utils.decors.pydantic_requests import validate_input 
 from ....utils.decors.authenticate import validate_session 
 from ....settings import URL_PREFIX, NEW_BOOK_API
-from ....db.models import Books
+from ....db.models import Books, Transactions
 from ....db import Session
 from ....db.utils import paginate
 
@@ -71,8 +71,22 @@ def get_books():
             if val:
                 q = q.filter(getattr(Books, key).contains(val))
         data, total_count = paginate(q, page_number, 20)
+        data = {dat.id: {
+            **dat.to_dict(),
+            "occupied_count": 0,
+            "availableCount": dat.bookCount,
+        } for dat in data}
+
+        # trust me i have tried using jion for this use case (It's hard to do count and outerjoin level seperate queries)
+        d = db.query(Transactions.id, Transactions.book_id).filter(
+            Transactions.book_id.in_(data.keys()),
+            Transactions.returned == False,
+        ).all()
+        for _, book_id in d:
+            data[book_id]["occupied_count"] += 1
+            data[book_id]["availableCount"] -= 1
     return {
         "success": True, 
-        "message": [dat.to_dict() for dat in data], 
+        "message": list(data.values()), 
         "total_count": total_count
     }, 200

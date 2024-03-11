@@ -91,6 +91,7 @@ export function informModal(
             btn2.classList.remove("d-none")
             btn1.removeEventListener("click", atEnd);
             btn2.removeEventListener("click", atEnd);
+            document.getElementById("inform-modal-header").innerHTML = ""
             btn1.disabled = false;
             btn2.disabled = false;
             resolve();

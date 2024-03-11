@@ -146,6 +146,72 @@ export function bindTransactionButton() {
 }
 
 /**
+ * bind transact card buttons
+ */
+function bindTransactCardButtons() {
+    const revertBtns = document.querySelectorAll(".revert-transaction-details-btn")
+    revertBtns.forEach(revertBtn => {
+        revertBtn.addEventListener("click", (el) => {
+            informModal(
+                INFORM_MODAL_MESSAGE.askTransactRevert + revertBtn.dataset.id, INFORM_MODAL_HEADER.askTransactRevert,
+                "Ok",
+                "Cancel",
+                () => {
+                    el.target.innerHTML = `<span class="mdi mdi-loading mdi-spin"></span>`
+                    ajax(`${URL_PREFIX}/api/transactions/transactions`, "POST", {
+                        id: revertBtn.dataset.id,
+                        returned: true,
+                    })
+                        .then(dat => {
+                            if (dat.status !== 200)
+                                informModal(INFORM_MODAL_MESSAGE.transactupdateFailure, INFORM_MODAL_HEADER.transactupdateFailure)
+                            else
+                                informModal(INFORM_MODAL_MESSAGE.transactUpdateSuccess, INFORM_MODAL_HEADER.transactUpdateSuccess)
+                            searchTransactions()
+                        })
+                        .catch(e => {
+                            console.log("error updating transaction", e)
+                            informModal(INFORM_MODAL_MESSAGE.transactupdateFailure, INFORM_MODAL_HEADER.transactupdateFailure)
+                            searchTransactions()
+                        })
+                }
+            )
+        })
+    })
+
+    const deleteBtns = document.querySelectorAll(".remove-transaction-details-btn")
+    deleteBtns.forEach(deleteBtn => {
+        deleteBtn.addEventListener("click", (el) => {
+            informModal(
+                INFORM_MODAL_MESSAGE.askTransactDelete + deleteBtn.dataset.id, INFORM_MODAL_HEADER.askTransactDelete,
+                "Ok",
+                "Cancel",
+                () => {
+                    el.target.innerHTML = `<span class="mdi mdi-loading mdi-spin"></span>`
+                    ajax(`${URL_PREFIX}/api/transactions/transactions`, "DELETE", {
+                        id: deleteBtn.dataset.id,
+                        returned: true,
+                    })
+                        .then(dat => {
+                            if (dat.status !== 200)
+                                informModal(INFORM_MODAL_MESSAGE.transactupdateFailure, INFORM_MODAL_HEADER.transactupdateFailure)
+                            else
+                                informModal(INFORM_MODAL_MESSAGE.transactDeleteSuccess, INFORM_MODAL_HEADER.transactDeleteSuccess)
+                            searchTransactions()
+                        })
+                        .catch(e => {
+                            console.log("error deleting transaction", e)
+                            informModal(INFORM_MODAL_MESSAGE.transactupdateFailure, INFORM_MODAL_HEADER.transactupdateFailure)
+                            searchTransactions()
+                        })
+                }
+            )
+        })
+    })
+}
+
+
+/**
  * Bind add transaction button
  */
 export function bindTransactAddButton() {
@@ -187,6 +253,7 @@ export function searchTransactions(options = {}) {
                     tranactions += getTransactionCard(dat)
                 });
                 DomMan.appendDataBody(tranactions)
+                bindTransactCardButtons();
 
                 const currentPage = options?.page || 1
                 PageToggle.setFooter(

@@ -55,6 +55,7 @@ def get_transactions():
                 "returned": transact.returned,  
                 "returned_at": transact.returned_at,
                 "borrowed_at": transact.borrowed_at,
+                "id": transact.id,
             })
     return {
         "success": True, 

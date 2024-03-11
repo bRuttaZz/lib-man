@@ -29,7 +29,7 @@
                     id="inform-modal-button">Ok</button>
             </div>
         </div>
-        <div class="modal-overlay_ modal_close_button pointer" data-close-item="">
+        <div class="modal-overlay_ modal_close_button pointer" data-close-item="asdfa87nasdf">
             <!-- no overlay the user should click the button  -->
         </div>
     </div>
@@ -396,14 +396,17 @@
                         </div>
                         <div class="small">
                             Transaction Closed : <b><span
-                                    class="text-danger data-member-books-count">TRANSACT_STATUS</span></b> 
+                                    class="TRANSACTSTATUS_TEXT_CLASS data-member-books-count">TRANSACT_STATUS</span></b> 
                             ( START_DATE - END_DATE )
 
                         </div>
                     </div>
                     <div class="justify-content-center d-flex flex-column align-items-center col-1">
-                        <button class="btn fs-4 main-color edit-member-details-btn">
-                            <span class="mdi mdi-square-edit-outline"></span>
+                        <button data-id="TRANSACT_ID" class="btn fs-4 main-color remove-transaction-details-btn REMOVE_BUTTON_CLASS">
+                            <span class="mdi mdi-trash-can-outline"></span>
+                        </button>
+                        <button data-id="TRANSACT_ID" class="btn fs-4 main-color revert-transaction-details-btn REVERT_BUTTON_CLASS">
+                            <span class="mdi mdi-file-undo"></span>
                         </button>
                     </div>
                 </div>

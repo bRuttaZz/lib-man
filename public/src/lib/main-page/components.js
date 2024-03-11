@@ -134,6 +134,10 @@ export function getTransactionCard(options) {
         TRANSACT_STATUS: options.returned,
         START_DATE: options.borrowed_at,
         END_DATE: options.returned_at || "_",
+        TRANSACT_ID: options.id,
+        REMOVE_BUTTON_CLASS: options.returned?"":"d-none",
+        REVERT_BUTTON_CLASS: options.returned?"d-none":"",
+        TRANSACTSTATUS_TEXT_CLASS: options.returned?"text-warning":"text-danger", 
     })
 }
 

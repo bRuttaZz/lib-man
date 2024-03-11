@@ -24,6 +24,11 @@ export const INFORM_MODAL_MESSAGE = {
     readerOperationFailuer: `Operation on Reader was unsuccessful!<br>Make sure you have provided a unique mobile/email.`,
     transactSuccess: `Transaction created successfully!<br>`,
     transactionFailture: `Transaction failure!<br>`,
+    askTransactDelete: `Do you want to <b>delete</b> the transaction : `,
+    askTransactRevert: `Do you want to <b>Revert</b> the transaction : `,
+    transactUpdateSuccess: `Transaction updated successfully!`,
+    transactDeleteSuccess: `Transaction deleted successfully!`,
+    transactupdateFailure: `Error updating transaction! Kindly contact your admin (I mean bRuttaZz)`,
 }
 
 export const INFORM_MODAL_HEADER = {
@@ -36,7 +41,9 @@ export const INFORM_MODAL_HEADER = {
     readerOperationSuccess: `<span class="mdi mdi-check-circle"></span> Success`,
     readerOperationFailuer: `<span class="mdi mdi-alert-circle"></span> Failure`,
     transactSuccess: `<span class="mdi mdi-check-circle"></span> Success`,
-    transactionFailture: `<span class="mdi mdi-alert-circle"></span> Failure`
+    transactionFailture: `<span class="mdi mdi-alert-circle"></span> Failure`,
+    askTransactDelete: `<span class="mdi mdi-alert-circle"></span> <b>sudo</b> required!`,
+
 }
 
 export const CUSTOMER_CENTER_WARNING = {

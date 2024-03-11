@@ -22,6 +22,8 @@ export const INFORM_MODAL_MESSAGE = {
     importNewBooksSuccess: `Books imported successfuly!`,
     readerOperationSuccess: `Operation on Reader successful! `,
     readerOperationFailuer: `Operation on Reader was unsuccessful!<br>Make sure you have provided a unique mobile/email.`,
+    transactSuccess: `Transaction created successfully!<br>`,
+    transactionFailture: `Transaction failure!<br>`,
 }
 
 export const INFORM_MODAL_HEADER = {
@@ -33,6 +35,8 @@ export const INFORM_MODAL_HEADER = {
     importNewBooksSuccess: `<span class="mdi mdi-check-circle"></span> Success`,
     readerOperationSuccess: `<span class="mdi mdi-check-circle"></span> Success`,
     readerOperationFailuer: `<span class="mdi mdi-alert-circle"></span> Failure`,
+    transactSuccess: `<span class="mdi mdi-check-circle"></span> Success`,
+    transactionFailture: `<span class="mdi mdi-alert-circle"></span> Failure`
 }
 
 export const CUSTOMER_CENTER_WARNING = {
@@ -40,3 +44,4 @@ export const CUSTOMER_CENTER_WARNING = {
     invalidPhone: "Invalid Phone number",
     invalidUsername: "Username should be between 3 to 15 characters!",
 }
+

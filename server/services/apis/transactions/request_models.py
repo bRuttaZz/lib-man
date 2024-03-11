@@ -7,7 +7,7 @@ class SearchTransactions(BaseModel):
     reader_name:str = Field("", description="name of the reader", min_length=1, max_length=15)
     book_name:str = Field("", description="title of the book", min_length=1, max_length=250)
     isbn: str = Field("", description="ISBN of the book", min_length=1, max_length=15)
-    transaction_status: str | None = Field("", description="Transaction status (Give True / False)", min_length=1, max_length=5)
+    transaction_status: str | None = Field(None, description="Transaction status (Give True / False)", min_length=1, max_length=5)
     page: int = Field(1, description="page number")
 
     @model_validator(mode="after")

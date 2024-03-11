@@ -47,3 +47,6 @@ JWT_SESSION_SECRET=os.getenv("JWT_SESSION_SECRET", "asdfbakshj34r4ffsasdhfgakshs
 ADMIN_PASSWORD_CHANGER_KEY = os.getenv("ADMIN_PASSWORD_CHANGER_KEY", "asecretkey")
 
 NEW_BOOK_API = os.getenv("NEW_BOOK_API", "https://frappe.io/api/method/frappe-library")
+
+# price for a single book
+SINGLE_BOOK_RENT=int(os.getenv("SINGLE_BOOK_RENT", "500"))

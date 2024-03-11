@@ -115,23 +115,25 @@ export function getReaderCard(options) {
  * Get new transaction card
  * @param {Object} options
  * @param {String} options.title - book title 
- * @param {String} options.author - book author 
- * @param {String} options.bookId - book id 
+ * @param {String} options.authors - book author 
+ * @param {String} options.book_id - book id 
  * @param {String} options.isbn - book isbn 
  * @param {String} options.readerName - reader name 
- * @param {String} options.readerId - reader id
- * @param {Boolean} options.transactionCompletionStatus - status of tranasction completion 
+ * @param {String} options.reader_id - reader id
+ * @param {Boolean} options.returned - status of tranasction completion 
  * @returns {String}
  */
 export function getTransactionCard(options) {
     return constructComponentFromDom("data-card-transaction", {
         BOOK_TITILE: options.title,
-        AUTHOR: options.author,
-        BOOKID: options.bookId,
+        AUTHOR: options.authors,
+        BOOKID: options.book_id,
         BOOK_ISBN: options.isbn,
         READER_NAME: options.readerName,
-        READER_ID: options.readerId,
-        TRANSACT_STATUS: options.transactionCompletionStatus,
+        READER_ID: options.reader_id,
+        TRANSACT_STATUS: options.returned,
+        START_DATE: options.borrowed_at,
+        END_DATE: options.returned_at || "_",
     })
 }
 

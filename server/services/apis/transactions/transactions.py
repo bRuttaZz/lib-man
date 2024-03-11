@@ -24,30 +24,39 @@ def get_transactions():
     logging.debug(f"getting transactions..")
 
     with Session() as db:
-        quer = db.query(Transactions)
-        if data._searchType is Transactions:
+        quer = db.query(Transactions, Members, Books)\
+                .join(Members, Transactions.reader_id == Members.id)\
+                .join(Books, Transactions.book_id == Books.id)\
+                .group_by(Transactions.id)
+        
+        if isinstance(data.transaction_status, bool): 
             quer = quer.filter(Transactions.returned == data.transaction_status)
-        elif data._searchType is Members:
-            members = db.query(Members.id).filter(Members.name.contains(data.reader_name)).all()
-            
-            quer = quer.filter(Transactions.reader_id.in_([member.id for member in members]))
+        if data.reader_name:            
+            quer = quer.filter(Members.name.contains(data.reader_name))
+        if data.book_name:
+            quer = quer.filter(Books.title.contains(data.book_name))
+        if data.isbn:
+            quer = quer.filter(Books.isbn.contains(data.isbn))
 
-        elif data._searchType is Books:
-            books_q = db.query(Books.id)
-            if data.book_name:
-                books_q = books_q.filter(Books.title.contains(data.book_name))
-            if data.isbn:
-                books_q = books_q.filter(Books.isbn.contains(data.isbn))
-            books = books_q.all()
-
-            quer = quer.filter(Transactions.book_id.in_([book.id for book in books]))
-
-        transactions, total_count = paginate(page_number, page_number, 20)
-        logging.info(f"retrieving {len(data)} transactions")
+        transactions, total_count = paginate(quer, page_number, 20)
+        logging.info(f"retrieving {len(transactions)} transactions")
+        messages = []
+        for transact, member, book in transactions:
+            messages.append({
+                "title": book.title,
+                "authors": book.authors,
+                "book_id": book.id,
+                "isbn": book.isbn,
+                "readerName": member.name,
+                "reader_id": member.id,
+                "returned": transact.returned,  
+                "returned_at": transact.returned_at,
+                "borrowed_at": transact.borrowed_at,
+            })
     return {
         "success": True, 
         "total_count": total_count, 
-        "message": [dat.to_dict() for dat in transactions]
+        "message": messages,
     }, 200
 
 

@@ -122,12 +122,62 @@
                     <button class="btn accent-color-2 me-2 fs-6 modal_close_button" data-close-item="#reader-modal"
                         id="">Cancel</button>
                     <button class="btn btn-danger me-2 fs-6" id="craete-or-update-field">Create/Update</button>
-                </div>    
+                </div>
             </div>
         </div>
         <div class="modal-overlay_ modal_close_button pointer" data-close-item="#reader-modal"></div>
     </div>
 
+
+    <!-- TRANSACTION'S MODAL  -->
+    <div class="d-none" id="transact-modal">
+        <div class="modal_">
+            <span class="fs-4">Membership Center</span>
+            <p>Update / Create <b>Reader</b> accounts!</p>
+
+            <div class="d-flex flex-column mt-3">
+                <div class="mb-2 text-danger fst-italic error-region create-transact-error-region small">
+                    <!-- error comes here -->
+                </div>
+
+                <div class="input-group mb-3 d-flex flex-column">
+                    <div class="input-group">
+                        <span class="input-group-text">#</span>
+                        <input id="transact-book-field" type="text" class="form-control text-box-bg"
+                            placeholder="Book Name" aria-label="Book Name">
+                    </div>
+                    <div>
+                        <ul id="transact-book-field-dropdown" class="d-none dropdown-menu dropdown-item-text w-100">
+                            <li class="dropdown-item"> </li>
+                            <li class="dropdown-item"> </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="input-group mb-3 d-flex flex-column">
+                    <div class="input-group">
+                        <span class="input-group-text">@</span>
+                        <input id="transact-member-field" type="text" class="form-control text-box-bg"
+                            placeholder="Reader's Name" aria-label="Reader's Name">
+                    </div>
+                    <div>
+                        <ul id="transact-member-field-dropdown" class="d-none dropdown-menu dropdown-item-text w-100">
+                            <li class="dropdown-item"> </li>
+                            <li class="dropdown-item"> </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <div class="d-flex">
+                <div class="d-flex justify-content-end mt-2 w-100">
+                    <button class="btn accent-color-2 me-2 fs-6 modal_close_button"
+                        data-close-item="#transact-modal">Cancel</button>
+                    <button class="btn btn-danger me-2 fs-6" id="craete-tranact-btn">Create</button>
+                </div>
+            </div>
+        </div>
+        <div class="modal-overlay_ modal_close_button pointer" data-close-item="#transact-modal"></div>
+    </div>
 
 
     <!-- nav bar  -->
@@ -346,7 +396,9 @@
                         </div>
                         <div class="small">
                             Transaction Closed : <b><span
-                                    class="text-danger data-member-books-count">TRANSACT_STATUS</span></b>
+                                    class="text-danger data-member-books-count">TRANSACT_STATUS</span></b> 
+                            ( START_DATE - END_DATE )
+
                         </div>
                     </div>
                     <div class="justify-content-center d-flex flex-column align-items-center col-1">

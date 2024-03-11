@@ -13,8 +13,8 @@ import {
 import { errorCase } from "../utils/ui.js"
 import { searchNewBooks } from "./tabs/newbooks.js"
 import { searchBooks } from "./tabs/books.js"
-import { searchReaders, bindAddButton, bindReaderCardValidators } from "./tabs/readers.js"
-
+import { searchReaders, bindReaderAddButton, bindReaderCardValidators } from "./tabs/readers.js"
+import { searchTransactions, bindTransactAddButton, autoSearchBinds, bindTransactionButton } from "./tabs/transactions.js"
 
 /**
  * Bind page toggle listeners
@@ -22,20 +22,22 @@ import { searchReaders, bindAddButton, bindReaderCardValidators } from "./tabs/r
 function bindPageToggle() {
     const container = document.getElementById("footer-buttons")
     container.addEventListener("pageChangeTriger", (e) => {
+        const params = { ...e.detail.param, page: e.detail.page }
         switch (e.detail.tabName) {
             case "booksTab":
-                searchBooks({ ...e.detail.param, page: e.detail.page })
+                searchBooks(params)
                 break;
 
             case "importBooksTab":
-                searchNewBooks({ ...e.detail.param, page: e.detail.page })
+                searchNewBooks(params)
                 break;
 
             case "readersTab":
-                searchReaders({ ...e.detail.param, page: e.detail.page })
+                searchReaders(params)
                 break;
 
             case "transactionsTab":
+                searchTransactions(params)
                 break;
         }
     })
@@ -84,6 +86,7 @@ function bindSearchBar() {
                 break;
 
             case "transactionsTab":
+                searchTransactions(params)
                 break;
         }
     })
@@ -95,6 +98,8 @@ function bindSearchBar() {
 export function bindTabListeners() {
     bindReaderCardValidators();
     bindPageToggle();
+    autoSearchBinds();
+    bindTransactionButton();
     PageToggle.bindToggler()
     document.getElementById("nav-bar").addEventListener("tabSwtich", e => {
         errorCase(false)
@@ -114,11 +119,13 @@ export function bindTabListeners() {
                 break;
 
             case "readersTab":
-                bindAddButton()
+                bindReaderAddButton()
                 searchReaders()
                 break;
 
             case "transactionsTab":
+                bindTransactAddButton()
+                searchTransactions()
                 break;
         }
         SearchSelectorItems.setSelectorList(e.detail.tabName)

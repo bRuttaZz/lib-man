@@ -169,7 +169,7 @@ export function bindReaderCardValidators() {
 /**
  * Bind add reader button
  */
-export function bindAddButton() {
+export function bindReaderAddButton() {
     DomMan.replaceDataHeader(getTopButton({ buttonName: "New Reader", buttonClassName: "new-reader-create-btn" }))
     document.querySelector(".new-reader-create-btn").addEventListener("click", (el) => {
         resetReaderUpdaterModal();
@@ -192,7 +192,6 @@ export function bindAddButton() {
  * @param {String} options.phone_number  
  */
 export function searchReaders(options = {}) {
-    console.log("options got", options)
     return new Promise((resolve, reject) => {
         let url = `${URL_PREFIX}/api/readers/member?`;
         for (let key in options) {

@@ -17,6 +17,7 @@ COPY --from=static-build /app/public /app/public
 RUN mv example.env .env
 
 ENV PYTHONUNBUFFERED=TRUE
-EXPOSE 8000
-ENTRYPOINT ["gunicorn", "main:app", "--bind", "0.0.0.0:8000" ] 
+EXPOSE 8080
+ENV PORT=8080
+ENTRYPOINT ["gunicorn", "main:app", "--bind", "0.0.0.0:8080" ] 
 CMD ["-w", "1", "-t", "120" ]

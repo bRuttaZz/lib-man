@@ -11,8 +11,6 @@ If you got stuck say the magic words : `admin` and [`passowrd`](#features).
 1. It was meant to be simple as possible. Both visually and technically.
 2. **I write the entire application in a purism perspective (Like build it from scratch kind of thing).** 
 
-> It was challenging to build something from more basic libraries. (But I honestly felt the pain though!)
-
 **For the bellow kind of questions,**
 
 Why use flask? 
@@ -20,9 +18,8 @@ Why use flask?
 <br>You could have made it in django within few hours?
 <br>Wait have you trying to mimic reusable components in pure js?
 
-**I got this answer :** I was doing a show of kind of project. I know these stuffs and I used to use these. So I took it as a challenge to build all of them within 2 days.
-
-I didn't meant it's a whole awesome one. I got a lot of redundant code over here and there. But it's build within **2days** (time matters). [at-least a personal best] 
+**The answer :** I was doing a show of kind of project. So I took it as a challenge to build the whole project with more basic libraries within a limited time.
+ 
 
 ### Major Libraires in use
 
